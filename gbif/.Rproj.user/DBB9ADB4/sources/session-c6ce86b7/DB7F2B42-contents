@@ -1,0 +1,195 @@
+library(shiny)
+library(move2)
+library(keyring)
+library(shinyjs)
+
+ui <- fluidPage(
+  useShinyjs(),
+  tags$head(
+    tags$style(HTML("
+      #studySelectionUI {
+        max-width: 700px;
+        margin-left: 0px;
+      }
+      .confirmation-message {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    "))
+  ),
+  titlePanel("Movebank Study List"),
+  sidebarLayout(
+    sidebarPanel(
+      width = 3,
+      textInput("username", "Username:"),
+      passwordInput("password", "Password:"),
+      actionButton("login", "Login"),
+      br(), br(),
+      uiOutput("chooseScaleBtn")
+    ),
+    mainPanel(
+      width = 9,
+      h3("Share with MoveTraits"),
+      uiOutput("studySelectionUI"),
+      verbatimTextOutput("confirmation")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  studies <- reactiveVal(NULL)
+  selected_temporal <- reactiveVal(NULL)
+  selected_spatial <- reactiveVal(NULL)
+  mailto_link <- reactiveVal(NULL)
+  
+  observeEvent(input$login, {
+    req(input$username, input$password)
+    tryCatch({
+      movebank_store_credentials(input$username, input$password, key_name = input$username)
+      options("move2_movebank_key_name" =input$username)
+      # s <- movebank_download_study_info(i_am_owner = TRUE)
+      ## for testing
+      s <- movebank_download_study_info(i_have_download_access = TRUE)
+      s <- s[1:10,]
+      
+      studies(if (nrow(s) > 0) s else NULL)
+      if (nrow(s) == 0) showModal(modalDialog("No studies found.", easyClose = TRUE))
+    }, error = function(e) {
+      showModal(modalDialog(paste("Error:", e$message), title = "Login Failed"))
+    })
+  })
+  
+  ###### ToDo: ####
+  ### add to each line 2 dropdowns:
+  ## - temporal: "Annual", "Monthly", "Weekly", "Daily", "Hourly"
+  ## - spatial: "1km", "5km", "30km"
+  ### if the adding in the same line does not work, maybe a pop up dialog 
+  ## to select. The exact way is not fixed, the importat part is that for 
+  ## each line it should be possible to select a temporal and spacial option
+  
+  ### creation of a table the contains the selected studies with the selected 
+  ## temporal and spatial option. For now these 3 columns are sufficent
+  
+  output$studySelectionUI <- renderUI({
+    req(studies())
+    checkboxGroupInput("selectedStudies", "Select studies:", choices = studies()$name)
+  })
+  
+  # output$chooseScaleBtn <- renderUI({
+  #   if (length(input$selectedStudies) > 0) {
+  #     actionButton("proceed", "Choose Scale", class = "btn-primary")
+  #   }
+  # })
+  # 
+  # observeEvent(input$proceed, {
+  #   showModal(modalDialog(
+  #     title = "Temporal Scale",
+  #     radioButtons("temporal", "Resolution:", 
+  #                  c("Annual", "Monthly", "Daily", "Hourly")),
+  #     footer = tagList(
+  #       modalButton("Cancel"),
+  #       actionButton("temporalNext", "Next")
+  #     )
+  #   ))
+  # })
+  # 
+  # observeEvent(input$temporalNext, {
+  #   req(input$temporal)
+  #   removeModal()
+  #   selected_temporal(input$temporal)
+  #   showModal(modalDialog(
+  #     title = "Spatial Scale",
+  #     radioButtons("spatial", "Resolution:", 
+  #                  c("1km", "5km", "10km", "100km")),
+  #     footer = tagList(
+  #       modalButton("Back"),
+  #       actionButton("confirm", "Confirm")
+  #     )
+  #   ))
+  # })
+  # 
+  # observeEvent(input$confirm, {
+  #   req(input$spatial)
+  #   removeModal()
+  #   selected_spatial(input$spatial)
+  #   showModal(modalDialog(
+  #     title = "Final Confirmation",
+  #     tagList(
+  #       div(class = "confirmation-message",
+  #           h4("Shared studies:"),
+  #           tags$ul(lapply(input$selectedStudies, tags$li)),
+  #           h4("Scales:"),
+  #           tags$ul(
+  #             tags$li(paste("Temporal:", selected_temporal())),
+  #             tags$li(paste("Spatial:", selected_spatial()))
+  #           )
+  #       ),
+  #       selectInput("title", "Title:", c("", "Dr.", "Prof.", "Mr.", "Ms.", "Mrs.")),
+  #       textInput("firstName", "First Name:", ""),
+  #       textInput("lastName", "Last Name:", ""),
+  #       textInput("affiliation", "Affiliation:", ""),
+  #       textInput("email", "Email:", ""),
+  #       textInput("altContact", "Alternate Contact (Email):", "")
+  #     ),
+  #     footer = tagList(
+  #       modalButton("Back"),
+  #       actionButton("finalConfirm", "Submit Sharing Request")
+  #     ),
+  #     size = "l"
+  #   ))
+  # })
+  # 
+  # observeEvent(input$finalConfirm, {
+  #   removeModal()
+  #   study_ids <- studies()$id[match(input$selectedStudies, studies()$name)]
+  #   timestamp <- format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")
+  #   email_body <- paste(
+  #     "I confirm that I share the following studies with moveTraits:",
+  #     paste("-", input$selectedStudies, "(Movebank ID:", study_ids, ")", collapse = "\n"),
+  #     "\nTemporal scale:", selected_temporal(),
+  #     "\nSpatial scale:", selected_spatial(),
+  #     "\n\nContact Information:",
+  #     paste("Title:", input$title),
+  #     paste("Name:", input$firstName, input$lastName),
+  #     paste("Affiliation:", input$affiliation),
+  #     paste("Email:", input$email),
+  #     paste("Alternate Contact:", input$altContact),
+  #     paste("\nSubmitted at:", timestamp),
+  #     sep = "\n"
+  #   )
+  #   mailto_link(paste0(
+  #     "mailto:movetraits@ab.mpg.de",
+  #     "?subject=MoveTraits%20Data%20Sharing%20Agreement",
+  #     "&body=", URLencode(email_body, reserved = TRUE)
+  #   ))
+  #   showModal(modalDialog(
+  #     title = "Final Step: Send Email",
+  #     tags$div(
+  #       style = "font-size:16px;",
+  #       "Your sharing agreement is prepared. To complete the process, send the agreement by email."
+  #     ),
+  #     footer = tagList(
+  #       actionButton("dismiss", "Dismiss", class = "btn-default"),
+  #       actionButton("sendEmail", "Send Email", icon = icon("envelope"), class = "btn-primary")
+  #     ),
+  #     easyClose = TRUE
+  #   ))
+  # })
+  # 
+  # observeEvent(input$dismiss, {
+  #   removeModal()
+  #   removeUI(selector = "body > *", immediate = TRUE)
+  #   stopApp()
+  # })
+  # 
+  # observeEvent(input$sendEmail, {
+  #   req(mailto_link())
+  #   shinyjs::runjs(sprintf("window.open('%s')", mailto_link()))
+  #   removeUI(selector = "body > *", immediate = TRUE)
+  #   stopApp()
+  # })
+}
+
+shinyApp(ui, server)

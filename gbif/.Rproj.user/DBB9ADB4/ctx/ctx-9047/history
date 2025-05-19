@@ -1,0 +1,227 @@
+??pred
+library(readr)
+usethis::edit_r_environ()
+end_year <- 2025
+start_year <- end_year - 9
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+library(rgbif)
+end_year <- 2025
+start_year <- end_year - 9
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+library(rgbif)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+shiny::runApp('C:/Users/nafis/Downloads')
+runApp('C:/Users/nafis/Downloads')
+keyring::key_list()
+runApp('C:/Users/nafis/Downloads')
+s <- movebank_download_study_info(i_am_owner = TRUE)
+ss <- movebank_download_study_info()
+movebank_remove_credentials(key_name = "mbUser")
+movebank_remove_credentials(key_name = "mbUser")
+ss <- movebank_download_study_info()
+keyring::key_list()
+movebank_remove_credentials()
+keyring::key_list()
+movebank_remove_credentials(key_name = "movebank")
+options("move2_movebank_key_name" = "movebank")
+movebank_store_credentials("tavakol5272", "Radmehr89*")
+s <- movebank_download_study_info(i_am_owner = TRUE)
+s
+names(s)
+# s <- movebank_download_study_info(i_am_owner = TRUE)
+s <- movebank_download_study_info(i_have_download_access = TRUE)
+s <- s[1:10,]
+movebank_store_credentials("tavakol5272", "Radmehr1389*")
+movebank_remove_credentials(key_name = "movebank")
+movebank_store_credentials("tavakol5272", "Radmehr1389*")
+movebank_store_credentials("tavakol5272", "Radmehr89*")
+runApp('C:/Users/nafis/Downloads')
+View(s)
+View(s)
+missingSps <- missingSps[-1]
+###########################
+### download gbif data ####
+###########################
+#usethis::edit_r_environ()
+#GBIF_USER="tavakol5272"
+#GBIF_PWD="Radmehr89*"
+#GBIF_EMAIL="ntavakol@ab.mpg.de"
+library(rgbif)
+library(readr)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+# Define download path
+download_path <- "/home/ascharf/Documents/Projects/E4Warning"
+download_key <- occ_d$meta$downloadKey
+library(rgbif)
+library(readr)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+# Define download path
+#download_path <- "/home/ascharf/Documents/Projects/E4Warning"
+download_path <- "E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif"
+download_key <- occ_d$meta$downloadKey
+usethis::edit_r_environ()
+library(rgbif)
+library(readr)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+# Define download path
+#download_path <- "/home/ascharf/Documents/Projects/E4Warning"
+download_path <- "E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif"
+download_key <- occ_d$meta$downloadKey
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+str(occ_d)
+download_path <- "E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif"
+download_key <- occ_d
+print(download_key)
+download_key <- as.character(occ_d)
+print(download_key)
+zip_file <- file.path(download_path, paste0(download_key, ".zip"))
+occ_download_wait(occ_d)
+dwn <- occ_download_get(occ_d, path = download_path)
+citation_text <- attr(occ_d, "citation")
+citation_file <- file.path(download_path, paste0("GBIF_citation_", download_key, ".txt"))
+writeLines(citation_text, citation_file)
+unzip(dwn[[1]], exdir = download_path)
+csv_file <- file.path(download_path, paste0(download_key, ".csv"))
+rds_path <- file.path(download_path, "gbifData", paste0("species_in_", download_key, ".rds"))
+dta <- read_delim(csv_file, delim = "\t", col_select = "species")
+library(rgbif)
+library(readr)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+str(occ_d)
+download_path <- "E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif"
+#download_key <- occ_d$meta$downloadKey
+download_key <- as.character(occ_d)
+print(download_key)
+zip_file <- file.path(download_path, paste0(download_key, ".zip"))
+occ_download_wait(occ_d)
+library(rgbif)
+library(readr)
+end_year <- 2025
+#start_year <- end_year - 9
+start_year <- end_year - 2
+region_polygon <- "POLYGON((8.96136 47.7155,9.02477 47.7155,9.02477 47.74642,8.96136 47.74642,8.96136 47.7155))"
+#region_polygon <- "POLYGON((-26.01051 33.20471,-25.27652 33.20471,47.9298 32.46067,48.89006 71.94297,-25.27652 71.22729,-26.01051 71.22729,-26.01051 33.20471))"
+occ_d <- occ_download(
+pred("hasGeospatialIssue", FALSE),
+pred("hasCoordinate", TRUE),
+pred("occurrenceStatus", "PRESENT"),
+pred_and(pred_gte("year", start_year), pred_lte("year", end_year)),
+pred_within(region_polygon),
+pred("taxonKey", 212),
+pred_lte("coordinateUncertaintyInMeters", "100"),
+format = "SIMPLE_CSV"
+)
+#str(occ_d)
+# Define download path
+#download_path <- "/home/ascharf/Documents/Projects/E4Warning"
+download_path <- "E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif"
+#download_key <- occ_d$meta$downloadKey
+download_key <- as.character(occ_d)
+print(download_key)
+zip_file <- file.path(download_path, paste0(download_key, ".zip"))
+occ_download_wait(occ_d)
+dwn <- occ_download_get(occ_d, path = download_path)

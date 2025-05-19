@@ -1,0 +1,2 @@
+data <- readRDS("E:/Neuer Ordner/konstany study/hiwi/animove/animove_R/rgbif/output/gbifData/species_in_0006900-250515123054153")
+View(data)
