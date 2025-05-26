@@ -2,9 +2,9 @@
 ### download gbif data ####
 ###########################
 #usethis::edit_r_environ()
-#GBIF_USER="tavakol5272"
-#GBIF_PWD="Radmehr89*"
-#GBIF_EMAIL="ntavakol@ab.mpg.de"
+#GBIF_USER="....."
+#GBIF_PWD="....."
+#GBIF_EMAIL="....@ab.mpg.de"
 
 library(rgbif)
 library(readr)
